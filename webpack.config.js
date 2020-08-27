@@ -3,8 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 
-    entry: './src/js/index.js',
-
+    entry: ['./src/js/index.js'],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/bundle.js'
@@ -12,7 +11,7 @@ module.exports = {
     devServer: {
         contentBase: './dist'
     },
-    
+
     //Injecting index.html from src
     plugins: [
         new HtmlWebpackPlugin({
@@ -20,5 +19,18 @@ module.exports = {
             template: './src/index.html'
         })
 
-    ]
+    ],
+    //uses babel loader ES6 --> ES5
+    module: {
+        rules: [{
+
+            test: /\.js$/,
+
+            exclude: /node_modules/,
+
+            use: {
+                loader: 'babel-loader'
+            }
+        }]
+    }
 };

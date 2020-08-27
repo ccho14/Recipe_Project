@@ -1,0 +1,17 @@
+//Setting up the Babel environment so that last 5 versions will be affected
+
+{
+    "presets": [
+        ["@babel/env", {
+            "useBuiltIns": "usage",
+            "corejs": "3",
+            "targets": {
+                "browsers": [
+                    "last 5 versions",
+                    "ie >= 8"
+                ]
+            }
+        }]
+    ]
+ }
+ 
