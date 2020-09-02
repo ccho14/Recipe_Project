@@ -1,6 +1,2 @@
-// Global app controller
+import str from './models/Search';
 
-import num from './test';
-const x= 23;
-
-console.log(`I imported ${num} from another module and continuosly updating Variable x is ${x} `);
