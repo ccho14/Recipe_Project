@@ -26,7 +26,9 @@ const state = {};
 const controlSearch = async () => {
     // 1) Get query from view
     const query = searchView.getInput();
-    console.log(query);
+
+
+    // console.log(query);
 
     if (query) {
         // 2) New search object and add to state
@@ -37,14 +39,14 @@ const controlSearch = async () => {
         searchView.clearResults();
         renderLoader(elements.searchRes);
         try {
-        // 4) Search for recipes
-        await state.search.getResults();
+            // 4) Search for recipes
+            await state.search.getResults();
 
-        // 5) render results on UI
-        // console.log(state.search.result);
-        clearLoader();
-        searchView.renderResults(state.search.result);
-        } catch (err){
+            // 5) render results on UI
+            // console.log(state.search.result);
+            clearLoader();
+            searchView.renderResults(state.search.result);
+        } catch (err) {
             alert('Something wrong with the search...');
         }
 
@@ -55,7 +57,6 @@ elements.searchForm.addEventListener('submit', e => {
     e.preventDefault();
     controlSearch();
 });
-
 
 //Clicking pagination
 elements.searchResPages.addEventListener('click', e => {
@@ -97,8 +98,13 @@ const controlRecipe = async () => {
         state.recipe = new Recipe(id);
 
         try {
-            // Get recipe data
+            // Get recipe data and parse ingredients
             await state.recipe.getRecipe();
+            
+            // Debugging the result before using parseIngredients()
+            // console.log(state.recipe.ingredients);
+
+            state.recipe.parseIngredients();
 
             // Calculate servings and time
             state.recipe.calcTime();
