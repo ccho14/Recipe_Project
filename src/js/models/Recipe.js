@@ -30,13 +30,14 @@ export default class Recipe {
 
     calcServing() {
 
-        this.serving = 4;
+        this.servings = 4;
     }
 
     parseIngredients() {
 
         const unitsLong = ['tablespoons', 'talbespoon', 'ounces', 'ounce', 'teaspoons', 'teaspoon', 'cups', 'pounds'];
         const unitsShort = ['tbsp', 'tbsp', 'oz', 'oz', 'tsp', 'tsp', 'cup', 'pound'];
+        const units =[...unitsShort, 'kg', 'g'];
 
         const newIngredients = this.ingredients.map(el => {
 
@@ -48,13 +49,13 @@ export default class Recipe {
 
             // Remove parentheses completly
             // Lecture 149 - 20 minutes
-            ingredient = ingredient.replace(/ *\([^]*\) */g, ' ');
+            ingredient = ingredient.replace(/ *\([^)]*\) */g, ' ');
 
             // Parse ingredients into count, unit and ingredient
             const arrIng = ingredient.split(' ');
 
             // Learn findIndex
-            const unitIndex = arrIng.findIndex(el2 => unitsShort.includes(el2));
+            const unitIndex = arrIng.findIndex(el2 => units.includes(el2));
 
             let objIng;
             if (unitIndex > -1) {
